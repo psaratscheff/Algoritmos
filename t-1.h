@@ -313,7 +313,8 @@ void array_force_add2(Array *array, Order *iValueToAdd){
 				array->content[position] = iValueToAdd;
 				break;
 			}
-			else
+			c+=1;
+			if (c>=array->capacity)
 			{
 				if (position==hash(iValueToAdd->type)%array->capacity){ 
 					printf("ERROR. The content could not be allocated\n");
@@ -593,7 +594,8 @@ void array_add2(Array *array, Order *iValueToAdd){
 				array->content[position] = iValueToAdd;
 				break;
 			}
-			else
+			c+=1;
+			if (c>=array->capacity)
 			{
 				if (position==hash(iValueToAdd->type)%array->capacity){ 
 					printf("ERROR. The content could not be allocated\n");
