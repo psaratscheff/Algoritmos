@@ -303,6 +303,7 @@ void array_force_add2(Array *array, Order *iValueToAdd){
 	}
 	else
 	{
+		int c=1;
 		while(1){
 			hashed_value = universal(hashed_value); //Segundo método de hashing entregado
 			position = hashed_value%array->capacity;
@@ -584,6 +585,7 @@ void array_add2(Array *array, Order *iValueToAdd){
 	}
 	else
 	{
+		int c=1;
 		while(1){
 			hashed_value = universal(hashed_value); //Segundo método de hashing entregado
 			position = hashed_value%array->capacity;
