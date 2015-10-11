@@ -303,6 +303,7 @@ void array_force_add2(Array *array, Order *iValueToAdd){
 	}
 	else
 	{
+		int c=1;
 		while(1){
 			hashed_value = universal(hashed_value); //Segundo método de hashing entregado
 			position = hashed_value%array->capacity;
@@ -313,7 +314,8 @@ void array_force_add2(Array *array, Order *iValueToAdd){
 				array->content[position] = iValueToAdd;
 				break;
 			}
-			else
+			c+=1;
+			if (c>=array->capacity)
 			{
 				if (position==hash(iValueToAdd->type)%array->capacity){ 
 					printf("ERROR. The content could not be allocated\n");
@@ -583,6 +585,7 @@ void array_add2(Array *array, Order *iValueToAdd){
 	}
 	else
 	{
+		int c=1;
 		while(1){
 			hashed_value = universal(hashed_value); //Segundo método de hashing entregado
 			position = hashed_value%array->capacity;
@@ -593,7 +596,8 @@ void array_add2(Array *array, Order *iValueToAdd){
 				array->content[position] = iValueToAdd;
 				break;
 			}
-			else
+			c+=1;
+			if (c>=array->capacity)
 			{
 				if (position==hash(iValueToAdd->type)%array->capacity){ 
 					printf("ERROR. The content could not be allocated\n");

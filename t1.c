@@ -180,3 +180,4 @@ int main(int argc, char *argv[])
 	puts("ERROR EN EL LOOP, llegamos a la última linea del archivo, wtf?!");
 	return 1;
 }
+

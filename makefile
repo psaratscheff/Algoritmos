@@ -1,4 +1,4 @@
 all:
-	cc t1.c   -o t1
+	cc t1.c   -o tarea1
 clean:
-	rm -f t1
+	rm -f tarea1
