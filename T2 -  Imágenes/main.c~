@@ -1,7 +1,7 @@
 // C program for Huffman Coding
 #include <stdio.h>
 #include <stdlib.h>
-#include "pixel.c"
+#include "estructuraPix.c"
 
 
 
