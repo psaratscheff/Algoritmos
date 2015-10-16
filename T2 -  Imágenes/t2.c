@@ -7,6 +7,7 @@
 #include "qdbmp.h" // Página del autor: http://qdbmp.sourceforge.net/
 #include "definitions.h"
 #include "huffman.h"
+#include "binaryread.h"
 #include <stdio.h>
 
 int main( int argc, char* argv[] )
@@ -136,7 +137,11 @@ int main( int argc, char* argv[] )
   populateColorArrays(colorPixels, colorFrequencies);
 
   // -------------------------- GOT THE ARRAYS ---------------------------
+  // -------------------------- Prepare Header ---------------------------
 
+  binary_file(argc, argv);
+
+  // -------------------------- ??????????????? ---------------------------
   int size = sizeof(colorPixels)/sizeof(colorPixels[0]);
 
   if (sizeof(colorPixels) > 0 && sizeof(colorFrequencies) > 0 ){

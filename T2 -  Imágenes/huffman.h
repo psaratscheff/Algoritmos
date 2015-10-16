@@ -188,12 +188,14 @@ void printArr(int arr[], int n)
 //void printArr(pixel arr[], int n) sim
 {
     int i;
-    char[n] code = malloc(sizeof(char)*n);
+    unsigned char *output = malloc(n+1); // One for trailing zero
+    //char[n] code = malloc(sizeof(char)*n);
     for (i = 0; i < n; ++i)
-        *code << arr[i];
-        printf("%d", arr[i]);
+        //*code << arr[i];
+        output[i] = arr[i];
+        //printf("%d", arr[i]);
 //        printf("r:%d, g:%d, b:%d  ", (arr[i]).r,(arr[i]).g,(arr[i]).b); sim
-
+    printf("%s\n", output);
     printf("\n");
 }
 
