@@ -3,12 +3,23 @@
 |   Modificado código de: http://www.geeksforgeeks.org/greedy-algorithms-set-3-huffman-coding/
 |
 \******************************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
 
 typedef struct pixel {
   unsigned char r;
   unsigned char g;
   unsigned char b;
 }pixel;
+
+typedef struct huffmanColor {
+    int id;
+    char* code;
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
+}huffmanColor;
 
 // This constant can be avoided by explicitly calculating height of Huffman Tree
 #define MAX_TREE_HT 100
@@ -188,15 +199,25 @@ void printArr(int arr[], int n)
 //void printArr(pixel arr[], int n) sim
 {
     int i;
-    unsigned char *output = malloc(n+1); // One for trailing zero
+    //unsigned char *output = malloc(n+1); // One for trailing zero
     //char[n] code = malloc(sizeof(char)*n);
+    //char temp[n+1];
+    //int tmp;
+    //printf("%d\n", n);
     for (i = 0; i < n; ++i)
-        //*code << arr[i];
-        output[i] = arr[i];
-        //printf("%d", arr[i]);
-//        printf("r:%d, g:%d, b:%d  ", (arr[i]).r,(arr[i]).g,(arr[i]).b); sim
-    printf("%s\n", output);
-    printf("\n");
+    {
+        //tmp = arr[i];
+        //assert(tmp >= 0 && tmp <= 9);
+        //temp[i] = tmp + '0';
+        printf("%d", arr[i]);
+    }
+    //printf(" || ");
+    //temp[i]='\0';
+    //printf("%s\n", temp);
+    //puts(temp);
+
+    //printf("  ||  %s", output[1]);
+    printf(" \n");
 }
 
 // Prints huffman codes from the root of Huffman Tree.  It uses arr[] to
@@ -227,8 +248,69 @@ void printCodes(struct MinHeapNode* root, int arr[], int top)
     }
 }
 
+// utilidad para la función anterior
+void populateArr(huffmanColor hf_colors[], int arr[], int n, int* cnter)
+//void printArr(pixel arr[], int n) sim
+{
+    int i;
+    //unsigned char *output = malloc(n+1); // One for trailing zero
+    //char[n] code = malloc(sizeof(char)*n);
+    char temp[n+1];
+    int tmp;
+    //printf("%d\n", n);
+    for (i = 0; i < n; ++i)
+    {
+        tmp = arr[i];
+        assert(tmp >= 0 && tmp <= 9);
+        temp[i] = tmp + '0';
+        //printf("%d", arr[i]);
+    }
+    temp[i]='\0';
+
+    //printf(" || ");
+    printf("%s\n", temp);
+
+    //hf_colors[*cnter].code = temp;
+    //printf(" || %s\n", hf_colors[*cnter].code);
+
+}
+
+// Rellenar valores una vez terminado en el array original
+void populateCodes(huffmanColor hf_colors[], struct MinHeapNode* root, int arr[], int top, int* cnter)
+{
+    // Assign 0 to left edge and recur
+    if (root->left)
+    {
+        arr[top] = 0;
+        populateCodes(hf_colors, root->left, arr, top + 1, cnter);
+    }
+
+    // Assign 1 to right edge and recur
+    if (root->right)
+    {
+        arr[top] = 1;
+        populateCodes(hf_colors, root->right, arr, top + 1, cnter);
+    }
+
+    // If this is a leaf node, then it contains one of the input
+    // characters, print the character and its code from arr[]
+    if (isLeaf(root))
+    {
+        //printf("r:%d\n", *cnter);
+        //printf("Counter: %d\n", *cnter);
+        hf_colors[*cnter].r = root->data.r;
+        hf_colors[*cnter].g = root->data.g;
+        hf_colors[*cnter].b = root->data.b;
+        //printf("r:%d, g:%d, b:%d, huffmanCode: ", root->data.r,root->data.g,root->data.b);
+        populateArr(hf_colors, arr, top, cnter);
+        //printf("Counter: %d\n", *cnter);
+        *cnter += 1;
+    }
+}
+
 // The main function that builds a Huffman Tree and print codes by traversing
 // the built Huffman Tree
+//void HuffmanCodes(huffmanColor hf_colors[], pixel data[], int freq[], int size)
 void HuffmanCodes(pixel data[], int freq[], int size)
 {
    //  Construct Huffman Tree
@@ -236,5 +318,7 @@ void HuffmanCodes(pixel data[], int freq[], int size)
 
    // Print Huffman codes using the Huffman tree built above
    int arr[MAX_TREE_HT], top = 0;
+   int *cnter; *cnter = 0;
+   //populateCodes(hf_colors, root, arr, top, cnter);
    printCodes(root, arr, top);
 }

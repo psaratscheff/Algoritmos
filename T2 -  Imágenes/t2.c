@@ -133,18 +133,20 @@ int main( int argc, char* argv[] )
 
   pixel colorPixels[ColorsLength];
   int colorFrequencies[ColorsLength];
+  //huffmanColor hfColors[ColorsLength];
 
   populateColorArrays(colorPixels, colorFrequencies);
 
   // -------------------------- GOT THE ARRAYS ---------------------------
   // -------------------------- Prepare Header ---------------------------
 
-  binary_file(argc, argv);
+  //binary_file(argc, argv);
 
   // -------------------------- ??????????????? ---------------------------
   int size = sizeof(colorPixels)/sizeof(colorPixels[0]);
 
   if (sizeof(colorPixels) > 0 && sizeof(colorFrequencies) > 0 ){
+    //HuffmanCodes(hfColors, colorPixels, colorFrequencies, size);
     HuffmanCodes(colorPixels, colorFrequencies, size);
   }
   else{
